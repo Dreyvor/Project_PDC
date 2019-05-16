@@ -3,14 +3,12 @@
 # 4-QAM : c0 = (1,1), c1 = (1, -1), c2 = (-1, -1), c3 = (-1, 1)
 # 00->c0, 01->c1, 10->c2, 11->c3
 
-s = ""
-
 def listCodeToBinary(codes):
     lTemp = []
     for pair in codes:
         lTemp.append(codewordToBinary(pair))
     
-    return s.join(lTemp)
+    return "".join(lTemp)
     
     
 def codewordToBinary(x):

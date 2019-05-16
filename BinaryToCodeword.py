@@ -11,13 +11,14 @@ c3 = (-1,1)
 lBinPair = []
 
 def binaryToCodeword(s):
-    makePair(s) #add bits by pair in lBinPair
+    lBinPair = makePair(s) #add bits by pair in lBinPair
     
-    changeToCodeword()
+    lres = changeToCodeword(lBinPair)
     
-    return lBinPair
+    return lres
     
 def makePair(s):
+    lTemp = []
     counter = 0
     temp = -1
     for bit in s:
@@ -25,14 +26,16 @@ def makePair(s):
         if(counter%2 != 0):
             temp = bit
         else:
-            lBinPair.append((temp, bit))
+            lTemp.append((temp, bit))
             temp = -1
+    return lTemp
     
-def changeToCodeword():
-    lBinTemp = lBinPair.copy()
+def changeToCodeword(l):
+    lTemp = []
+    lBinTemp = l.copy()
     for x in lBinTemp: #change pair to respective codewords
-        lBinPair.pop(0)
-        lBinPair.append(pairToCodeword(x))
+        lTemp.append(pairToCodeword(x))
+    return lTemp
     
 def pairToCodeword(x):
     if(x == ('0','0')):
