@@ -1,9 +1,9 @@
-##### Call 'binaryToCodeword(String)' to translate a binary string to a 4-QAM code, returns a list of pairs '(+-1, +-1)'
+##### Call 'f(String)' to translate a 4-QAM code to a binary string, return a binary string
 
 # 4-QAM : c0 = (1,1), c1 = (1, -1), c2 = (-1, -1), c3 = (-1, 1)
 # 00->c0, 01->c1, 10->c2, 11->c3
 
-def listCodeToBinary(codes):
+def f(codes):
     lTemp = []
     for pair in codes:
         lTemp.append(codewordToBinary(pair))
@@ -12,7 +12,6 @@ def listCodeToBinary(codes):
     
     
 def codewordToBinary(x):
-    print("x = ", x)
     if(x == (1,1)):
         return "00"
     elif(x == (1,-1)):
