@@ -3,13 +3,10 @@
 # 1 -> -1, 0 -> 1
 
 def f(s):
-    string = ""
-    temp = "" 
+    res = []
     for c in s:
         if(c == '1'):
-            c = '-1'
+            res.append(-1)
         else:
-            c = '1'    
-        temp = string + c
-        string = temp
-    return string
+            res.append(1)    
+    return res
