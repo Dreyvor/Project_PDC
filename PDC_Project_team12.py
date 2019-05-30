@@ -3,7 +3,7 @@ import BinaryToCodeword as b2c
 import CodewordToBinary as c2b
 import numpy as np
 
-
+##################################################################
 def textToCodewords(txt):
     bits = tb.text_to_bits(txt)
     codeword = b2c.f(bits)
@@ -16,10 +16,11 @@ def codewordToText(codeword):
 
 ##################################################################
 #Define Psi(t)
+
 beta = 1/2.0
 #T_psi : good values begin at 1/400
 T_psi = 1/600.0 # we want it small
-print("The frequency-band will have a width of:",1/T_psi,"Hz until 1/2T (see p. 171)")
+print("The frequency-band will have a width of approximately:",1/T_psi,"Hz")
 
 def psi(t):
     c = 1.0 - np.square(4.0 * beta * t / T_psi)
@@ -133,7 +134,7 @@ def offsets(rcv_signal):
     return res
 
 #####################################################################
-# DECODE
+# DECODING
 
 import time
 import os
@@ -146,7 +147,7 @@ def decode(rcv_signal, base):
     tab_offsets = offsets(rcv_signal)
     
     after = time.time()
-    print("time to compute parameters :", after - now)
+    print("### Time to compute parameters :", after - now)
     
     offset_start = tab_offsets[0] + clap_len
     offset_end = tab_offsets[1]
@@ -174,17 +175,13 @@ def receiver(decoded):
 def main(s):
     code = b2c.f(tb.text_to_bits(s))
     signal = encode(code, base)
-    #plotSentSignal(signal)
     
     np.savetxt("to_send.txt", signal)
     cmd_send_to_srv = 'python client.py --input_file=to_send.txt --output_file=received.txt --srv_hostname=iscsrv72.epfl.ch --srv_port=80'
     
-    print("Sending the following string to the server:", s)
     os.system(cmd_send_to_srv)
     
-    #time to send and receive back
-    #time.sleep(3)
-    print("String sended and the server sended the result. Let's decode the message...")    
+    print("### String sent.")
 
     received = np.loadtxt("received.txt")
     decoded = decode(received, base)
@@ -196,6 +193,6 @@ def main(s):
 #################################################################
 # Start the machine
 
-given_str = 3*"We all love charcoal powder, it's really better than cocaine! "
-print("The given string was:\n", given_str)
-print("And we decoded:\n",main(given_str))
+given_str = "I don't know half of you half as well as I should like; and I like less than half of you half as well as you deserve."
+print("Sending:\n", given_str)
+print("Decoded:\n",main(given_str))
