@@ -99,7 +99,7 @@ clap_end = np.loadtxt("clap_end.txt")
 clap_len = len(clap_start)
 
 #####################################################################
-# PARAMETER ESTIMATION
+# SYMBOL SYNCHRNOISATION
 
 def findOffset(signal_received, signal_desired, b):
     signal_desired_length = len(signal_desired)
